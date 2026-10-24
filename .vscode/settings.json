@@ -1,0 +1,45 @@
+{
+  // ============================================================
+  //  07_机器人学 永久使用 conda 的 dl 环境
+  //  dl = Python 3.12.15 + numpy 2.5.2 + sympy 1.13.1
+  //  和深度学习 06 共用同一个环境，不用再建新的
+  //
+  //  不配这些，VS Code 会回退到 /usr/bin/python3（3.14.4，系统自带）
+  //  那个环境没有 numpy 2.5.2 也没装 sympy，右下角会显示"解释器无效"
+  // ============================================================
+
+  // 旧版 Python 扩展的设置（保留兼容）
+  "python.defaultInterpreterPath": "/home/yohan/miniforge3/envs/dl/bin/python",
+
+  // ---- 新版 Python Environments 扩展的设置 ----
+  "python-envs.globalSearchPaths": [
+    "/home/yohan/miniforge3/envs"
+  ],
+  "python-envs.workspaceSearchPaths": [
+    ".venv",
+    "*/.venv",
+    "/home/yohan/miniforge3/envs"
+  ],
+  "python-envs.defaultEnvManager": "ms-python.python:conda",
+  "python-envs.pythonProjects": [
+    {
+      "path": ".",
+      "envManager": "ms-python.python:conda",
+      "packageManager": "ms-python.python:pip"
+    }
+  ],
+
+  // ============================================================
+  //  Ruff 关掉
+  //  #%% 交互窗口是"虚拟文档"，Ruff 处理它会报
+  //    ERROR: Text document URI does not point to a text document
+  //  每跑一次就弹一次错。Pylance 类型检查不受影响。
+  // ============================================================
+  "ruff.enable": false,
+
+  // ---- 其它 ----
+  "python.analysis.diagnosticMode": "openFilesOnly",
+  "python.analysis.typeCheckingMode": "basic",
+  "files.encoding": "utf8",
+  "files.eol": "\n"
+}

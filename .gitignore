@@ -1,0 +1,15 @@
+# 课件与参考书：他人版权材料，不上传
+_教材/
+
+# 个人日报 / 周报：含组会与研究方向，不公开
+日报*.md
+周报*.md
+
+# Python
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+
+# 系统
+.DS_Store
+Thumbs.db
