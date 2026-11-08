@@ -13,3 +13,12 @@ __pycache__/
 # 系统
 .DS_Store
 Thumbs.db
+
+# 纳博特 SDK：厂商二进制（两份共约 10 MB，且内容重复），不入库
+nrc_sdk/
+nrc_sdk_24.03_backup/
+*.so
+
+# 编译缓存
+__pycache__/
+*.pyc
