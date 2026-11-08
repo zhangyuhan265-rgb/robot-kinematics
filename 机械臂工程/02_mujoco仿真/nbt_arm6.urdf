@@ -1,0 +1,319 @@
+<?xml version="1.0"?>
+<!--
+  纳博特六轴机械臂  控制器 192.168.2.14 / SDK 2.0.4-20260202
+  运动学由 12 组真机 (关节角, TCP) 样本反解，位置残差最大 0.003 mm。
+
+  DH 表（标准/远端 DH: T = Rot_z(θ)·Trans_z(d)·Trans_x(a)·Rot_x(α)）
+    i    θ     d(mm)   a(mm)  α(deg)  off(deg)
+    1   θ1    431.0   170.0    +90       +0
+    2   θ2      0.0   790.0     +0      -90
+    3   θ3      0.0   156.0    +90       +0
+    4   θ4    750.0     0.0    +90       +0
+    5   θ5      0.0     0.0    +90      +90
+    6   θ6    132.5     0.0     +0     +180
+
+  重要：URDF 关节角 == 控制器关节角 q，零位偏置已折进各 joint 的 origin。
+        tcp 帧 == 控制器 get_current_position(fd, 1, ...) 的坐标系（TCP=法兰）。
+
+  外形按现场照片近似（两级基座 / 弯曲铸件大臂 / 侧置电机 / 锥形小臂），
+  由基元拼装，只影响 visual 与 collision，不参与运动学。
+  惯量按等效圆柱+假定质量推算，不是实测值，做动力学前必须替换。
+-->
+<robot name="nbt_arm6">
+
+  <material name="metal_dark">
+    <color rgba="0.62 0.63 0.65 1"/>
+  </material>
+  <material name="metal_light">
+    <color rgba="0.88 0.87 0.84 1"/>
+  </material>
+  <material name="metal_flange">
+    <color rgba="0.46 0.47 0.50 1"/>
+  </material>
+
+  <link name="base_link">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="45"/>
+      <inertia ixx="0.576486664" ixy="0" ixz="0" iyy="0.576486664" iyz="0" izz="0.5405625"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.022843" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.215" length="0.045686"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.145678" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.165" length="0.199984"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.27153" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.14" length="0.05172"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.1428765" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.155" length="0.285753"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint1" type="revolute">
+    <parent link="base_link"/>
+    <child link="link1"/>
+    <origin xyz="0 0 0" rpy="0 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.268928028" upper="2.268928028" effort="500" velocity="1.730905043"/>
+  </joint>
+
+  <link name="link1">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="25"/>
+      <inertia ixx="0.39395472" ixy="0" ixz="0" iyy="0.39395472" iyz="0" izz="0.1953125"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.340059" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.128" length="0.097406"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0.0748 0 0.425397" rpy="0 0 0"/>
+      <geometry><box size="0.31 0.255 0.155"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0.10863 0 0.431" rpy="0 1.570796327 0"/>
+      <geometry><cylinder radius="0.112" length="0.12274"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0.11798 0.13 0.471897" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.07" length="0.093"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.3286375" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.125" length="0.096975"/></geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.0782 0 0.425397" rpy="0 0 0"/>
+      <geometry><box size="0.32 0.26 0.16"/></geometry>
+    </collision>
+    <collision>
+      <origin xyz="0.10863 0 0.431" rpy="0 1.570796327 0"/>
+      <geometry><cylinder radius="0.112" length="0.12274"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint2" type="revolute">
+    <parent link="link1"/>
+    <child link="link2"/>
+    <origin xyz="0.17 0 0.431" rpy="1.570796327 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.268928028" upper="2.268928028" effort="500" velocity="1.730905043"/>
+  </joint>
+
+  <link name="link2">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="30"/>
+      <inertia ixx="1.60825" ixy="0" ixz="0" iyy="1.60825" iyz="0" izz="0.096"/>
+    </inertial>
+    <visual>
+      <origin xyz="-0.015183673 0.056428571 0" rpy="0 1.570796327 1.833648383"/>
+      <geometry><box size="0.165 0.19 0.120871341"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.040489796 0.169285714 0" rpy="0 1.570796327 1.748293668"/>
+      <geometry><box size="0.165 0.19 0.118658583"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.055673469 0.282142857 0" rpy="0 1.570796327 1.660249549"/>
+      <geometry><box size="0.165 0.19 0.117310188"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.060734694 0.395 0" rpy="0 1.570796327 1.570796327"/>
+      <geometry><box size="0.165 0.19 0.116857143"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.055673469 0.507857143 0" rpy="0 1.570796327 1.481343105"/>
+      <geometry><box size="0.165 0.19 0.117310188"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.040489796 0.620714286 0" rpy="0 1.570796327 1.393298985"/>
+      <geometry><box size="0.165 0.19 0.118658583"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.015183673 0.733571429 0" rpy="0 1.570796327 1.307944271"/>
+      <geometry><box size="0.165 0.19 0.120871341"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.108" length="0.23"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0.79 0" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.22"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0.395 0" rpy="0 1.570796327 1.570796327"/>
+      <geometry><cylinder radius="0.075" length="0.79"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint3" type="revolute">
+    <parent link="link2"/>
+    <child link="link3"/>
+    <origin xyz="0 0.79 0" rpy="0 0 1.570796327"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.268928028" upper="2.268928028" effort="500" velocity="2.596357565"/>
+  </joint>
+
+  <link name="link3">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="12"/>
+      <inertia ixx="0.0961" ixy="0" ixz="0" iyy="0.0961" iyz="0" izz="0.0864"/>
+    </inertial>
+    <visual>
+      <origin xyz="0.078 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.215 0.215 0.175"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 -0.0225" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.1" length="0.265"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0.078 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.24 0.24 0.225"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint4" type="revolute">
+    <parent link="link3"/>
+    <child link="link4"/>
+    <origin xyz="0.156 0 0" rpy="1.570796327 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.268928028" upper="2.268928028" effort="500" velocity="3.926990817"/>
+  </joint>
+
+  <link name="link4">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="14"/>
+      <inertia ixx="0.66885" ixy="0" ixz="0" iyy="0.66885" iyz="0" izz="0.0252"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.028125" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.076" length="0.05625"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.249" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.062" length="0.402"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.58425" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.052" length="0.285"/></geometry>
+      <material name="metal_light"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.363375" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.062" length="0.72675"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint5" type="revolute">
+    <parent link="link4"/>
+    <child link="link5"/>
+    <origin xyz="0 0 0.75" rpy="1.570796327 0 0"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-2.268928028" upper="2.268928028" effort="500" velocity="1.951299785"/>
+  </joint>
+
+  <link name="link5">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="6"/>
+      <inertia ixx="0.0270375" ixy="0" ixz="0" iyy="0.0270375" iyz="0" izz="0.021675"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.145 0.145 0.165"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <visual>
+      <origin xyz="-0.0325 0 0" rpy="0 1.570796327 0"/>
+      <geometry><cylinder radius="0.075" length="0.235"/></geometry>
+      <material name="metal_dark"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <geometry><box size="0.17 0.145 0.185"/></geometry>
+    </collision>
+  </link>
+
+  <joint name="joint6" type="revolute">
+    <parent link="link5"/>
+    <child link="link6"/>
+    <origin xyz="0 0 0" rpy="1.570796327 0 -1.570796327"/>
+    <axis xyz="0 0 1"/>
+    <limit lower="-6.283185307" upper="6.283185307" effort="500" velocity="3.926990817"/>
+  </joint>
+
+  <link name="link6">
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="3"/>
+      <inertia ixx="0.006657813" ixy="0" ixz="0" iyy="0.006657813" iyz="0" izz="0.0045375"/>
+    </inertial>
+    <visual>
+      <origin xyz="0 0 0.0645275" rpy="0 0 0"/>
+      <geometry><box size="0.145 0.12 0.12"/></geometry>
+      <material name="metal_flange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.1148775" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.058" length="0.0318"/></geometry>
+      <material name="metal_flange"/>
+    </visual>
+    <visual>
+      <origin xyz="0 0 0.1325" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.03" length="0.00689"/></geometry>
+      <material name="metal_flange"/>
+    </visual>
+    <collision>
+      <origin xyz="0 0 0.0645275" rpy="0 0 0"/>
+      <geometry><cylinder radius="0.055" length="0.129055"/></geometry>
+    </collision>
+  </link>
+
+  <!-- TCP = 法兰：与控制器 get_current_position(fd, 1, ...) 同一坐标系 -->
+  <joint name="tcp_joint" type="fixed">
+    <parent link="link6"/>
+    <child link="tcp"/>
+    <origin xyz="0 0 0.1325" rpy="0 0 -3.141592654"/>
+  </joint>
+
+  <link name="tcp">
+    <!-- 空帧也有个极小惯量：不给的话 pybullet 等后端会按 mass=1、惯量=1 顶替 -->
+    <inertial>
+      <origin xyz="0 0 0" rpy="0 0 0"/>
+      <mass value="0.05"/>
+      <inertia ixx="1e-5" ixy="0" ixz="0" iyy="1e-5" iyz="0" izz="1e-5"/>
+    </inertial>
+  </link>
+</robot>

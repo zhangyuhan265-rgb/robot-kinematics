@@ -1,0 +1,89 @@
+<mujoco model="nbt_arm6">
+  <compiler angle="radian"/>
+  <visual>
+    <global offwidth="1280" offheight="960"/>
+    <quality shadowsize="4096" offsamples="8"/>
+    <headlight ambient="0.42 0.42 0.46" diffuse="0.45 0.45 0.45" specular="0.12 0.12 0.12"/>
+    <map znear="0.02" zfar="60"/>
+  </visual>
+  <asset>
+    <texture name="sky" type="skybox" builtin="gradient" rgb1="0.28 0.34 0.45" rgb2="0.86 0.90 0.95" width="256" height="256"/>
+    <texture name="grid" type="2d" builtin="checker" rgb1="0.72 0.74 0.77" rgb2="0.62 0.64 0.68" width="512" height="512"/>
+    <material name="floor" texture="grid" texrepeat="8 8" reflectance="0.06"/>
+    <texture name="walltex" type="2d" builtin="checker" rgb1="0.90 0.91 0.93" rgb2="0.84 0.86 0.89" width="256" height="256"/>
+    <material name="wallmat" texture="walltex" texrepeat="6 6" reflectance="0.02"/>
+    <material name="cast"   rgba="0.26 0.27 0.30 1" specular="0.42" shininess="0.55" reflectance="0.05"/>
+    <material name="paint"  rgba="0.73 0.75 0.79 1" specular="0.30" shininess="0.40" reflectance="0.03"/>
+    <material name="gold"   rgba="0.82 0.63 0.16 1" specular="0.75" shininess="0.85" reflectance="0.10"/>
+    <material name="steel"  rgba="0.40 0.42 0.46 1" specular="0.85" shininess="0.95" reflectance="0.12"/>
+    <material name="rubber" rgba="0.10 0.10 0.11 1" specular="0.08" shininess="0.15" reflectance="0.01"/>
+  </asset>
+  <worldbody>
+    <light pos="1.6 -1.6 3.2" dir="-0.6 0.6 -1" directional="true" diffuse="0.55 0.55 0.55"/>
+    <light pos="-1.6 1.4 2.6" dir="0.6 -0.5 -1" directional="true" diffuse="0.32 0.33 0.36"/>
+    <geom name="floor" type="plane" size="8 8 0.1" material="floor" pos="0 0 0"/>
+    <geom name="wall" type="box" size="0.02 3.0 1.6" pos="1.1 0 1.6" material="wallmat"/>
+    <body name="riser" pos="0 0 0" quat="1 0 0 0">
+      <geom type="cylinder" size="0.16 0.16825" pos="0 0 0.16825" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+      <body name="base_link" pos="0 0 0.3365" quat="1 0 0 0">
+        <geom type="cylinder" size="0.215 0.022843" pos="0 0 0.022843" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+        <geom type="cylinder" size="0.165 0.099992" pos="0 0 0.145678" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+        <geom type="cylinder" size="0.14 0.02586" pos="0 0 0.27153" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+        <body name="link1" pos="0 0 0" quat="1 0 0 0">
+          <joint name="joint1" type="hinge" axis="0 0 1" pos="0 0 0" range="-2.268928 2.268928" damping="2"/>
+          <geom type="cylinder" size="0.128 0.048703" pos="0 0 0.340059" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+          <geom type="box" size="0.155 0.1275 0.0775" pos="0.0748 0 0.425397" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+          <geom type="cylinder" size="0.112 0.06137" pos="0.10863 0 0.431" quat="0.707107 0 0.707107 0" material="cast" contype="0" conaffinity="0"/>
+          <geom type="cylinder" size="0.07 0.0465" pos="0.11798 0.13 0.471897" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+          <body name="link2" pos="0.17 0 0.431" quat="0.707107 0.707107 0 0">
+            <joint name="joint2" type="hinge" axis="0 0 1" pos="0 0 0" range="-2.268928 2.268928" damping="2"/>
+            <geom type="box" size="0.0825 0.095 0.060436" pos="-0.015184 0.056429 0" quat="0.430164 -0.561212 0.430164 0.561212" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.059329" pos="-0.04049 0.169286 0" quat="0.453716 -0.542348 0.453716 0.542348" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.058655" pos="-0.055673 0.282143 0" quat="0.477144 -0.521856 0.477144 0.521856" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.058429" pos="-0.060735 0.395 0" quat="0.5 -0.5 0.5 0.5" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.058655" pos="-0.055673 0.507857 0" quat="0.521856 -0.477144 0.521856 0.477144" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.059329" pos="-0.04049 0.620714 0" quat="0.542348 -0.453716 0.542348 0.453716" material="paint" contype="0" conaffinity="0"/>
+            <geom type="box" size="0.0825 0.095 0.060436" pos="-0.015184 0.733571 0" quat="0.561212 -0.430164 0.561212 0.430164" material="paint" contype="0" conaffinity="0"/>
+            <geom type="cylinder" size="0.108 0.115" pos="0 0 0" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+            <geom type="cylinder" size="0.1 0.11" pos="0 0.79 0" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+            <body name="link3" pos="0 0.79 0" quat="0.707107 0 0 0.707107">
+              <joint name="joint3" type="hinge" axis="0 0 1" pos="0 0 0" range="-2.268928 2.268928" damping="2"/>
+              <geom type="box" size="0.1075 0.1075 0.0875" pos="0.078 0 0" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+              <geom type="cylinder" size="0.1 0.1325" pos="0 0 -0.0225" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+              <body name="link4" pos="0.156 0 0" quat="0.707107 0.707107 0 0">
+                <joint name="joint4" type="hinge" axis="0 0 1" pos="0 0 0" range="-2.268928 2.268928" damping="2"/>
+                <geom type="cylinder" size="0.076 0.028125" pos="0 0 0.028125" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+                <geom type="cylinder" size="0.062 0.201" pos="0 0 0.249" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+                <geom type="cylinder" size="0.052 0.1425" pos="0 0 0.58425" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+                <geom type="cylinder" size="0.01 0.2" pos="0.05 0.018 0.32" quat="1 0 0 0" material="rubber" contype="0" conaffinity="0"/>
+                <geom type="cylinder" size="0.066 0.005" pos="0 0 0.22" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+                <geom type="cylinder" size="0.058 0.005" pos="0 0 0.5" quat="1 0 0 0" material="paint" contype="0" conaffinity="0"/>
+                <body name="link5" pos="0 0 0.75" quat="0.707107 0.707107 0 0">
+                  <joint name="joint5" type="hinge" axis="0 0 1" pos="0 0 0" range="-2.268928 2.268928" damping="2"/>
+                  <geom type="box" size="0.0725 0.0725 0.0825" pos="0 0 0" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+                  <geom type="cylinder" size="0.075 0.1175" pos="-0.0325 0 0" quat="0.707107 0 0.707107 0" material="cast" contype="0" conaffinity="0"/>
+                  <geom type="cylinder" size="0.078 0.0045" pos="0 0 -0.06" quat="1 0 0 0" material="cast" contype="0" conaffinity="0"/>
+                  <body name="link6" pos="0 0 0" quat="0.5 0.5 -0.5 -0.5">
+                    <joint name="joint6" type="hinge" axis="0 0 1" pos="0 0 0" range="-6.283185 6.283185" damping="2"/>
+                    <geom type="box" size="0.0725 0.06 0.06" pos="0 0 0.064528" quat="1 0 0 0" material="gold" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.058 0.0159" pos="0 0 0.114877" quat="1 0 0 0" material="gold" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.03 0.003445" pos="0 0 0.1325" quat="1 0 0 0" material="gold" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.074 0.01" pos="0 0 0.136" quat="1 0 0 0" material="gold" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="0.048 0 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="0.024 0.041569 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="-0.024 0.041569 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="-0.048 0 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="-0.024 -0.041569 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <geom type="cylinder" size="0.005 0.007" pos="0.024 -0.041569 0.148" quat="1 0 0 0" material="steel" contype="0" conaffinity="0"/>
+                    <body name="tcp" pos="0 0 0.1325" quat="-0 0 -0 -1">
+                    </body>
+                  </body>
+                </body>
+              </body>
+            </body>
+          </body>
+        </body>
+      </body>
+    </body>
+  </worldbody>
+</mujoco>
