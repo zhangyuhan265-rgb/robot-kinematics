@@ -1,0 +1,142 @@
+======================================================================
+纳博特控制器参数备份（只读）
+时间   : 2026-11-07 11:37:12
+控制器 : 192.168.2.14:6001   SDK 2.0.4-20260202
+说明   : 空值/零值已省略，只列出非零项。恢复时零值按 0 处理。
+======================================================================
+
+[当前关节角 q（度）]
+  [-11.380673, -7.617113, 7.668081, -0.000157, 0.000171, 291.778990, 0.000000]
+
+[当前 TCP（控制器自算，mm + rad）]
+  [1244.360042, -250.470620, 1245.889267, 3.141415, 0.000869, -0.992051, 0.000000]
+
+[DH 参数  get_robot_dh_param  ret=0]
+  L1   = 377.0
+  L2   = 900.0
+  L3   = 130.0
+  L4   = 934.0
+  L5   = 154.0
+  L6   = 216.0
+  L7   = 0.0
+  L8   = 0.0
+  L9   = 0.0
+  L10  = 0.0
+  L11  = 0.0
+  L12  = 0.0
+  L13  = 0.0
+  L14  = 0.0
+  L15  = 0.0
+  L16  = 0.0
+  L17  = 0.0
+  L18  = 0.0
+  L19  = 0.0
+  L20  = 0.0
+  Couple_Coe_1_2             = '0.000000'
+  Couple_Coe_2_3             = '0.000000'
+  Couple_Coe_3_2             = '0.000000'
+  Couple_Coe_3_4             = '0.000000'
+  Couple_Coe_4_5             = '0.000000'
+  Couple_Coe_4_6             = '0.000000'
+  Couple_Coe_5_6             = '0.000000'
+  amplificationRatio         = 0.0
+  conversionratio_J1         = 0.0
+  conversionratio_J2         = 0.0
+  conversionratio_J3         = 0.0
+  conversionratio_x          = 0.0
+  conversionratio_y          = 0.0
+  conversionratio_z          = 0.0
+  dynamicLimit_max           = 0.0
+  dynamicLimit_min           = 0.0
+  fiveAxisDirection          = 90.0
+  pitch                      = 0.0
+  sliding_lead_value         = 0.0
+  spray_distance             = 0.0
+  threeAxisConversionRatio   = 0.0
+  threeAxisDirection         = 0.0
+  twoAxisConversionRatio     = 0.0
+  uplift_lead_value          = 0.0
+  upsideDown                 = 0
+
+[J1 关节参数  get_robot_joint_param  ret=-1]
+
+[J2 关节参数  get_robot_joint_param  ret=0]
+  deRatedVel                 = -99.173553719008
+  direction                  = 1
+  encoderResolution          = 23
+  maxAcc                     = 1.5
+  maxDeRotSpeed              = -1.0
+  maxDecel                   = -1.5
+  maxRotSpeed                = 1.0
+  negSWLimit                 = -130.0
+  posSWLimit                 = 130.0
+  ratedDeRotSpeed            = -2000.0
+  ratedRotSpeed              = 2000.0
+  ratedVel                   = 99.173553719008
+  reducRatio                 = 121.0
+
+[J3 关节参数  get_robot_joint_param  ret=0]
+  deRatedVel                 = -99.173553719008
+  direction                  = -1
+  encoderResolution          = 23
+  maxAcc                     = 1.5
+  maxDeRotSpeed              = -1.0
+  maxDecel                   = -1.5
+  maxRotSpeed                = 1.0
+  negSWLimit                 = -130.0
+  posSWLimit                 = 130.0
+  ratedDeRotSpeed            = -2000.0
+  ratedRotSpeed              = 2000.0
+  ratedVel                   = 99.173553719008
+  reducRatio                 = 121.0
+
+[J4 关节参数  get_robot_joint_param  ret=0]
+  deRatedVel                 = -148.760330578512
+  direction                  = 1
+  encoderResolution          = 23
+  maxAcc                     = 1.5
+  maxDeRotSpeed              = -1.0
+  maxDecel                   = -1.5
+  maxRotSpeed                = 1.0
+  negSWLimit                 = -130.0
+  posSWLimit                 = 130.0
+  ratedDeRotSpeed            = -3000.0
+  ratedRotSpeed              = 3000.0
+  ratedVel                   = 148.760330578512
+  reducRatio                 = 121.0
+
+[J5 关节参数  get_robot_joint_param  ret=0]
+  deRatedVel                 = -225.0
+  direction                  = -1
+  encoderResolution          = 23
+  maxAcc                     = 1.5
+  maxDeRotSpeed              = -1.0
+  maxDecel                   = -1.5
+  maxRotSpeed                = 1.0
+  negSWLimit                 = -130.0
+  posSWLimit                 = 130.0
+  ratedDeRotSpeed            = -3000.0
+  ratedRotSpeed              = 3000.0
+  ratedVel                   = 225.0
+  reducRatio                 = 80.0
+
+[J6 关节参数  get_robot_joint_param  ret=0]
+  deRatedVel                 = -111.801242236025
+  direction                  = 1
+  encoderResolution          = 23
+  maxAcc                     = 1.5
+  maxDeRotSpeed              = -1.0
+  maxDecel                   = -1.5
+  maxRotSpeed                = 1.0
+  negSWLimit                 = -130.0
+  posSWLimit                 = 130.0
+  ratedDeRotSpeed            = -3000.0
+  ratedRotSpeed              = 3000.0
+  ratedVel                   = 111.801242236025
+  reducRatio                 = 161.0
+
+[工具 0  get_tool_hand_param  ret=-1]
+
+[工具 1  get_tool_hand_param  ret=0]
+
+[工具 2  get_tool_hand_param  ret=0]
